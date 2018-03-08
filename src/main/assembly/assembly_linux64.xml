@@ -1,0 +1,52 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+
+    <id>${assemble.linux64.id}</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>de.konnekting:konnekting-suite::jar-with-dependencies</include>
+            </includes>
+            <useProjectArtifact>false</useProjectArtifact>   
+            <useProjectAttachments>false</useProjectAttachments>        
+            <outputDirectory>KONNEKTING Suite/bin</outputDirectory>
+        </dependencySet>
+        
+        <!-- splash screen image -->
+        <dependencySet>
+            <includes>
+                <include>de.konnekting:konnekting-suite::jar-with-dependencies</include>
+            </includes>
+            <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <includes>
+                    <include>splash/splash.png</include>
+                </includes>
+            </unpackOptions>
+        </dependencySet>
+        
+    </dependencySets>
+    
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources/linux/</directory>
+            <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <filtered>true</filtered>
+            <lineEnding>windows</lineEnding>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/jre.linux64/</directory>
+            <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+    </fileSets>
+
+</assembly>

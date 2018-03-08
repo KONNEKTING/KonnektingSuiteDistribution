@@ -1,0 +1,15 @@
+#define MANUFACTURER_ID %MANUFACTURER_ID%
+#define DEVICE_ID %DEVICE_ID%
+#define REVISION %REVISION%
+
+%IDNAMES%
+        
+KnxComObject KnxDevice::_comObjectsList[] = {
+%COMOBJ_LIST%
+};
+const byte KnxDevice::_numberOfComObjects = sizeof (_comObjectsList) / sizeof (KnxComObject); // do not change this code
+       
+byte KonnektingDevice::_paramSizeList[] = {
+%PARAM_LIST%
+};
+const byte KonnektingDevice::_numberOfParams = sizeof (_paramSizeList); // do not change this code

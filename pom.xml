@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.konnekting</groupId>
+    <artifactId>KonnektingSuiteDistribution</artifactId>
+    <version>1.0.0-BETA5-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <assemble.win64.id>dist-win64</assemble.win64.id>
+        <assemble.linux64.id>dist-linux64</assemble.linux64.id>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+    <name>KONNEKTING Suite Distribution</name>
+    
+    <build>
+        <plugins>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <id>read-plugin-properties</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <files>
+                        <file>${basedir}/jredownload.properties</file>
+                    </files>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>DownloadJre</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                
+                                <echo>Downloading JRE Win64</echo>
+                                <exec executable="/usr/bin/wget">
+                                    <arg value="-c"/>
+                                    <arg value="--no-cookies"/>
+                                    <arg value="--header"/>
+                                    <arg value="Cookie: oraclelicense=accept-securebackup-cookie"/>
+                                    <arg value="${jredownload.baseurl}${jredownload_win64.filename}"/>
+                                    <arg value="-O"/>
+                                    <arg value="${project.build.directory}/${jredownload_win64.filename}"/>
+                                </exec>
+                                <echo>*done*</echo>
+                                <delete dir="${project.basedir}/src/main/resources/jre.win64/"/>
+                                <untar src="${project.build.directory}/${jredownload_win64.filename}" dest="${project.basedir}/src/main/resources/jre.win64/" compression="gzip"/>
+                                
+                                <echo>Downloading JRE Linux64</echo>
+                                <exec executable="/usr/bin/wget">
+                                    <arg value="-c"/>
+                                    <arg value="--no-cookies"/>
+                                    <arg value="--header"/>
+                                    <arg value="Cookie: oraclelicense=accept-securebackup-cookie"/>
+                                    <arg value="${jredownload.baseurl}${jredownload_linux64.filename}"/>
+                                    <arg value="-O"/>
+                                    <arg value="${project.build.directory}/${jredownload_linux64.filename}"/>
+                                </exec>
+                                <echo>*done*</echo>
+                                <delete dir="${project.basedir}/src/main/resources/jre.linux64/"/>
+                                <untar src="${project.build.directory}/${jredownload_linux64.filename}" dest="${project.basedir}/src/main/resources/jre.linux64/" compression="gzip"/>
+                                
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>ant-contrib</groupId>
+                        <artifactId>ant-contrib</artifactId>
+                        <version>20020829</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.4</version>
+                <executions>
+                    <execution>
+                        <id>${assemble.win64.id}</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly_win64.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                                       
+                    <execution>
+                        <id>${assemble.linux64.id}</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly_linux64.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        
+        
+        </plugins>
+    </build>
+    
+    <dependencies>
+        <dependency>
+            <groupId>de.konnekting</groupId>
+            <artifactId>konnekting-suite</artifactId>
+            <version>${project.version}</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+    </dependencies>
+</project>
