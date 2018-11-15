@@ -11,7 +11,7 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>de.konnekting:konnekting-suite::jar-with-dependencies</include>
+                <include>de.konnekting:konnekting-suite:jar:jar-with-dependencies</include>
             </includes>
             <useProjectArtifact>false</useProjectArtifact>   
             <useProjectAttachments>false</useProjectAttachments>        
@@ -21,7 +21,7 @@
         <!-- splash screen image -->
         <dependencySet>
             <includes>
-                <include>de.konnekting:konnekting-suite::jar-with-dependencies</include>
+                <include>de.konnekting:konnekting-suite:jar:jar-with-dependencies</include>
             </includes>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
             <unpack>true</unpack>

@@ -21,7 +21,7 @@
     
     <fileSets>
         <fileSet>
-            <directory>src/main/resources/linux/</directory>
+            <directory>src/main/resources/windows/</directory>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
             <filtered>true</filtered>
             <lineEnding>windows</lineEnding>
