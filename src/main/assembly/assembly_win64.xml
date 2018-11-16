@@ -25,10 +25,22 @@
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
             <filtered>true</filtered>
             <lineEnding>windows</lineEnding>
+            <excludes>
+                <exclude>*.exe</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>src/main/resources/jre.win64/</directory>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/common/</directory>
+            <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <excludes>
+                <exclude>*.template</exclude>
+                <exclude>*.ico</exclude>
+                <exclude>license.txt</exclude>
+            </excludes>
         </fileSet>
     </fileSets>
 
