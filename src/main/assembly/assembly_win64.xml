@@ -20,27 +20,40 @@
     </dependencySets>
     
     <fileSets>
+        <!-- copy ini files and filter them -->
         <fileSet>
             <directory>src/main/resources/windows/</directory>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
             <filtered>true</filtered>
             <lineEnding>windows</lineEnding>
+            <includes>
+                <include>*.ini</include>
+                <include>*.bat</include>
+            </includes>
+        </fileSet>
+
+        <!-- copy everything else like EXE, unfiltered -->
+        <fileSet>
+            <directory>src/main/resources/windows/</directory>
+            <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <filtered>false</filtered>
             <excludes>
-                <exclude>*.exe</exclude>
+                <exclude>*.ini</exclude>
+                <exclude>*.bat</exclude>
             </excludes>
         </fileSet>
+        
+        <!-- copy jre -->
         <fileSet>
             <directory>src/main/resources/jre.win64/</directory>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
+            <filtered>false</filtered>
         </fileSet>
+        
+        <!-- copy common stuff -->
         <fileSet>
             <directory>src/main/resources/common/</directory>
             <outputDirectory>KONNEKTING Suite/</outputDirectory>
-            <excludes>
-                <exclude>*.template</exclude>
-                <exclude>*.ico</exclude>
-                <exclude>license.txt</exclude>
-            </excludes>
         </fileSet>
     </fileSets>
 
