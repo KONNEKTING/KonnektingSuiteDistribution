@@ -16,7 +16,6 @@ cache:
 verify:
   stage: test
   script:
-    - apt install wget
     - 'mvn $MAVEN_CLI_OPTS verify'
   except:
     - master
@@ -28,7 +27,6 @@ deploy:
     - if [ ! -f ci_settings.xml ];
         then echo "CI settings missing\!";
       fi
-    - apt install wget      
     - 'mvn $MAVEN_CLI_OPTS deploy -s ci_settings.xml'
   only:
     - master
