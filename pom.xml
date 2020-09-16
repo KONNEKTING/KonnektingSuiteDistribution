@@ -58,35 +58,35 @@
                             <target>
                                 
                                 <echo>Downloading JRE Win64</echo>
-                                <exec executable="/usr/bin/wget">
-                                    <arg value="${jredownload.baseurl}${jredownload_win64.filename}"/>
-                                    <arg value="-O"/>
-                                    <arg value="${project.build.directory}/${jredownload_win64.filename}"/>
-                                </exec>
+                                <get skipexisting="true"
+                                     verbose="true" 
+                                     usetimestamp="true" 
+                                     src="${jredownload.baseurl}${jredownload_win64.filename}" 
+                                     dest="${project.build.directory}/${jredownload_win64.filename}"/>
                                 <echo>*done*</echo>
                                 <delete dir="${project.basedir}/src/main/resources/jre.win64/"/>
                                 <unzip src="${project.build.directory}/${jredownload_win64.filename}" dest="${project.basedir}/src/main/resources/jre.win64/"/>
-                                
+                               
                                 <echo>Downloading JRE Linux64</echo>
-                                <exec executable="/usr/bin/wget">
-                                    <arg value="${jredownload.baseurl}${jredownload_linux64.filename}"/>
-                                    <arg value="-O"/>
-                                    <arg value="${project.build.directory}/${jredownload_linux64.filename}"/>
-                                </exec>
+                                <get skipexisting="true" 
+                                     verbose="true" 
+                                     usetimestamp="true" 
+                                     src="${jredownload.baseurl}${jredownload_linux64.filename}" 
+                                     dest="${project.build.directory}/${jredownload_linux64.filename}"/>
                                 <echo>*done*</echo>
                                 <delete dir="${project.basedir}/src/main/resources/jre.linux64/"/>
                                 <untar src="${project.build.directory}/${jredownload_linux64.filename}" dest="${project.basedir}/src/main/resources/jre.linux64/" compression="gzip"/>
                                 
                                 <echo>Downloading JRE MacOSX64</echo>
-                                <exec executable="/usr/bin/wget">
-                                    <arg value="${jredownload.baseurl}${jredownload_macosx64.filename}"/>
-                                    <arg value="-O"/>
-                                    <arg value="${project.build.directory}/${jredownload_macosx64.filename}"/>
-                                </exec>
+                                <get skipexisting="true"
+                                     verbose="true" 
+                                     usetimestamp="true" 
+                                     src="${jredownload.baseurl}${jredownload_macosx64.filename}" 
+                                     dest="${project.build.directory}/${jredownload_macosx64.filename}"/>                                                                
                                 <echo>*done*</echo>
                                 <delete dir="${project.basedir}/src/main/resources/jre.macosx64/"/>
                                 <untar src="${project.build.directory}/${jredownload_macosx64.filename}" dest="${project.basedir}/src/main/resources/jre.macosx64/" compression="gzip"/>
-                                
+
                             </target>
                         </configuration>
                         <goals>
@@ -94,13 +94,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>ant-contrib</groupId>
-                        <artifactId>ant-contrib</artifactId>
-                        <version>20020829</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             
             <plugin>
