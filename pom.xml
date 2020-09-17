@@ -41,7 +41,7 @@
                 </executions>
                 <configuration>
                     <files>
-                        <file>${basedir}/jredownload.properties</file>
+                        <file>${basedir}/src/main/resources/jredownload.properties</file>
                     </files>
                 </configuration>
             </plugin>
