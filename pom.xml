@@ -153,6 +153,13 @@
             <classifier>jar-with-dependencies</classifier>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>de.konnekting</groupId>
+            <artifactId>konnekting-code-creator</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+            <classifier>jar-with-dependencies</classifier>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
 <repositories>      

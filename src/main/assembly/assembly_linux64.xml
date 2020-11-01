@@ -17,6 +17,14 @@
             <useProjectAttachments>false</useProjectAttachments>        
             <outputDirectory>KONNEKTING Suite/bin</outputDirectory>
         </dependencySet>
+        <dependencySet>
+            <includes>
+                <include>de.konnekting:konnekting-code-creator:jar:jar-with-dependencies</include>
+            </includes>
+            <useProjectArtifact>false</useProjectArtifact>   
+            <useProjectAttachments>false</useProjectAttachments>        
+            <outputDirectory>KONNEKTING Suite/bin</outputDirectory>
+        </dependencySet>
         
         <!-- splash screen image -->
         <dependencySet>
