@@ -15,7 +15,7 @@ cache:
 build:
   stage: build
   script:
-    - 'mvn $MAVEN_CLI_OPTS compile'
+    - 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates compile'
 
 # For merge requests do not `deploy` but only run `verify`.
 # See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
