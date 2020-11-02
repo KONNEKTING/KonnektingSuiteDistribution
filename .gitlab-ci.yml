@@ -1,6 +1,6 @@
 variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version --update-snapshots"
 
 # This template uses jdk13 for verifying and deploying images
 image: maven:3.6.3-jdk-14
@@ -15,14 +15,14 @@ cache:
 build:
   stage: build
   script:
-    - 'mvn $MAVEN_CLI_OPTS compile'
+    - 'mvn $MAVEN_CLI_OPTS compile versions:display-dependency-updates'
 
 # For merge requests do not `deploy` but only run `verify`.
 # See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 test:
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS verify'
+    - 'mvn $MAVEN_CLI_OPTS verify versions:display-dependency-updates'
 
 # For `master` and `develop` branch run `mvn deploy` automatically.
 deploy:
@@ -31,7 +31,7 @@ deploy:
     - if [ ! -f ci_settings.xml ];
         then echo "CI settings missing\!";
       fi
-    - 'mvn $MAVEN_CLI_OPTS deploy -s ci_settings.xml'
+    - 'mvn $MAVEN_CLI_OPTS deploy versions:display-dependency-updates -s ci_settings.xml'
   only:
     - master
     - develop
